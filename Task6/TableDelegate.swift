@@ -11,14 +11,17 @@ import UIKit
 class TableDelegate: NSObject, UITableViewDelegate {
     
     var navViewController: UINavigationController?
-    
-    var rowHeight: CGFloat = 50.0
+    var rowHeight: CGFloat = 50.0    
     
 //    Изменяем высоту ячейки
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
             return 1.5  * rowHeight
         }
+        return rowHeight
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return rowHeight
     }
     
@@ -36,9 +39,8 @@ class TableDelegate: NSObject, UITableViewDelegate {
        
         let newView = ViewController()
         newView.indexPath = indexPath
-        newView.text = cell?.textLabel?.text ?? ""
+        newView.cell = cell!
         navViewController?.pushViewController(newView, animated: true)
-        cell?.textLabel?.text = ""
         
     }
 }

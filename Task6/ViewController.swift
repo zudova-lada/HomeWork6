@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var indexPath = IndexPath()
-    var text = String()
+    var cell = UITableViewCell()
     
     let button: UIButton = {
         let button = UIButton(type: .custom)
@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         return button
     }()
 
-    let textView: UITextView = {
+    var textView: UITextView = {
         let textView = UITextView()
         
         let height: CGFloat = UIScreen.main.bounds.height
@@ -44,7 +44,7 @@ class ViewController: UIViewController {
         
         textView.backgroundColor = UIColor.white
         textView.frame = CGRect(x: x, y: y, width: myWidth, height: myHeight)
-        textView.text = ""
+        textView.text =  ""
         
         return textView
     }()
@@ -56,18 +56,21 @@ class ViewController: UIViewController {
         textView.text = GetText()
         view.addSubview(textView)
         // Do any additional setup after loading the view.
-        print(text)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        cell.frame.size.height = 100.0
+        cell.sizeThatFits(CGSize(width: 200.0, height: 500.0))
+        cell.sizeToFit()
     }
 
     @objc func tapButton() {
-        text = textView.text
-//        var m = navigationController?.popViewController(animated: true)
-        //тут мацаем делегат
+        cell.textLabel?.text = textView.text
     }
     
     func GetText() -> String
     {
-        return text
+        return cell.textLabel!.text!
     }
 
 }

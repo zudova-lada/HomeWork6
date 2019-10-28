@@ -48,11 +48,11 @@ class DataSource: NSObject, UITableViewDataSource {
             imageNumber += data[i].count
         }
         imageNumber += indexPath.row
-//        print(imageNumber)
         
         cell.textLabel?.text = data[indexPath.section][indexPath.row]
         cell.imageView?.image = pictures[imageNumber]
-        
+        cell.textLabel?.numberOfLines = 0
+
         return cell
     }
     
@@ -67,6 +67,5 @@ class DataSource: NSObject, UITableViewDataSource {
         return nil
     }
     
-
    
 }
